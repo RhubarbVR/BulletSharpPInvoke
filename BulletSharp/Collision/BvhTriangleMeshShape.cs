@@ -16,7 +16,7 @@ namespace BulletSharp
 		public BvhTriangleMeshShape(StridingMeshInterface meshInterface, bool useQuantizedAabbCompression,
 			bool buildBvh = true)
 		{
-			IntPtr native = btBvhTriangleMeshShape_new(meshInterface.Native, useQuantizedAabbCompression,
+			var native = btBvhTriangleMeshShape_new(meshInterface.Native, useQuantizedAabbCompression,
 				buildBvh);
 			InitializeCollisionShape(native);
 			InitializeMembers(meshInterface);
@@ -25,7 +25,7 @@ namespace BulletSharp
 		public BvhTriangleMeshShape(StridingMeshInterface meshInterface, bool useQuantizedAabbCompression,
 			Vector3 bvhAabbMin, Vector3 bvhAabbMax, bool buildBvh = true)
 		{
-			IntPtr native = btBvhTriangleMeshShape_new2(meshInterface.Native, useQuantizedAabbCompression,
+			var native = btBvhTriangleMeshShape_new2(meshInterface.Native, useQuantizedAabbCompression,
 				ref bvhAabbMin, ref bvhAabbMax, buildBvh);
 			InitializeCollisionShape(native);
 			InitializeMembers(meshInterface);
@@ -94,7 +94,7 @@ namespace BulletSharp
 			{
 				if (_optimizedBvh == null && OwnsBvh)
 				{
-					IntPtr optimizedBvhPtr = btBvhTriangleMeshShape_getOptimizedBvh(Native);
+					var optimizedBvhPtr = btBvhTriangleMeshShape_getOptimizedBvh(Native);
 					_optimizedBvh = new OptimizedBvh(optimizedBvhPtr, this);
 				}
 				return _optimizedBvh;
@@ -115,7 +115,7 @@ namespace BulletSharp
 			{
 				if (_triangleInfoMap == null)
 				{
-					IntPtr triangleInfoMap = btBvhTriangleMeshShape_getTriangleInfoMap(Native);
+					var triangleInfoMap = btBvhTriangleMeshShape_getTriangleInfoMap(Native);
 					if (triangleInfoMap != IntPtr.Zero)
 					{
 						_triangleInfoMap = new TriangleInfoMap(triangleInfoMap, this);

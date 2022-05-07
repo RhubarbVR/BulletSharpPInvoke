@@ -9,7 +9,7 @@ namespace BulletSharp
 {
 	public class Hacd : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		delegate bool CallbackFunctionUnmanagedDelegate(IntPtr message, double progress, double globalConcavity, IntPtr numVertices);
 
 		public delegate bool CallbackFunction(string message, double progress, double globalConcavity, int numVertices);

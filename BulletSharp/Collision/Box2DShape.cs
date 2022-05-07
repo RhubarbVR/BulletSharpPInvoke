@@ -11,19 +11,19 @@ namespace BulletSharp
 
 		public Box2DShape(Vector3 boxHalfExtents)
 		{
-			IntPtr native = btBox2dShape_new(ref boxHalfExtents);
+			var native = btBox2dShape_new(ref boxHalfExtents);
 			InitializeCollisionShape(native);
 		}
 
 		public Box2DShape(float boxHalfExtent)
 		{
-			IntPtr native = btBox2dShape_new2(boxHalfExtent);
+			var native = btBox2dShape_new2(boxHalfExtent);
 			InitializeCollisionShape(native);
 		}
 
 		public Box2DShape(float boxHalfExtentX, float boxHalfExtentY, float boxHalfExtentZ)
 		{
-			IntPtr native = btBox2dShape_new3(boxHalfExtentX, boxHalfExtentY, boxHalfExtentZ);
+			var native = btBox2dShape_new3(boxHalfExtentX, boxHalfExtentY, boxHalfExtentZ);
 			InitializeCollisionShape(native);
 		}
 
@@ -36,8 +36,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBox2dShape_getCentroid(Native, out value);
+				btBox2dShape_getCentroid(Native, out var value);
 				return value;
 			}
 		}
@@ -46,8 +45,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBox2dShape_getHalfExtentsWithMargin(Native, out value);
+				btBox2dShape_getHalfExtentsWithMargin(Native, out var value);
 				return value;
 			}
 		}
@@ -56,8 +54,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBox2dShape_getHalfExtentsWithoutMargin(Native, out value);
+				btBox2dShape_getHalfExtentsWithoutMargin(Native, out var value);
 				return value;
 			}
 		}

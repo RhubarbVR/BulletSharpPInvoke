@@ -65,22 +65,19 @@ namespace BulletSharp
 				return null;
 			}
 
-			IntPtr userPtr = btCollisionObject_getUserPointer(obj);
-			if (userPtr != IntPtr.Zero)
-			{
-				return GCHandle.FromIntPtr(userPtr).Target as CollisionObject;
-			}
-
-			throw new InvalidOperationException("Unknown collision object!");
+			var userPtr = btCollisionObject_getUserPointer(obj);
+			return userPtr != IntPtr.Zero
+				? GCHandle.FromIntPtr(userPtr).Target as CollisionObject
+				: throw new InvalidOperationException("Unknown collision object!");
 		}
 
-		internal CollisionObject(ConstructionInfo info)
+		internal CollisionObject(ConstructionInfo _)
 		{
 		}
 
 		public CollisionObject()
 		{
-			IntPtr native = btCollisionObject_new();
+			var native = btCollisionObject_new();
 			InitializeCollisionObject(native);
 		}
 
@@ -88,7 +85,7 @@ namespace BulletSharp
 		{
 			InitializeUserOwned(native);
 
-			GCHandle handle = GCHandle.Alloc(this, GCHandleType.Weak);
+			var handle = GCHandle.Alloc(this, GCHandleType.Weak);
 			btCollisionObject_setUserPointer(Native, GCHandle.ToIntPtr(handle));
 		}
 
@@ -200,8 +197,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btCollisionObject_getAnisotropicFriction(Native, out value);
+				btCollisionObject_getAnisotropicFriction(Native, out var value);
 				return value;
 			}
 			set => btCollisionObject_setAnisotropicFriction(Native, ref value, AnisotropicFrictionFlags.Friction);
@@ -289,8 +285,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btCollisionObject_getInterpolationAngularVelocity(Native, out value);
+				btCollisionObject_getInterpolationAngularVelocity(Native, out var value);
 				return value;
 			}
 			set => btCollisionObject_setInterpolationAngularVelocity(Native, ref value);
@@ -300,8 +295,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btCollisionObject_getInterpolationLinearVelocity(Native, out value);
+				btCollisionObject_getInterpolationLinearVelocity(Native, out var value);
 				return value;
 			}
 			set => btCollisionObject_setInterpolationLinearVelocity(Native, ref value);
@@ -311,8 +305,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Matrix4x4 value;
-				btCollisionObject_getInterpolationWorldTransform(Native, out value);
+				btCollisionObject_getInterpolationWorldTransform(Native, out var value);
 				return value;
 			}
 			set => btCollisionObject_setInterpolationWorldTransform(Native, ref value);
@@ -374,8 +367,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Matrix4x4 value;
-				btCollisionObject_getWorldTransform(Native, out value);
+				btCollisionObject_getWorldTransform(Native, out var value);
 				return value;
 			}
 			set => btCollisionObject_setWorldTransform(Native, ref value);
@@ -383,12 +375,7 @@ namespace BulletSharp
 
 		public override bool Equals(object obj)
 		{
-			CollisionObject colObj = obj as CollisionObject;
-			if (colObj == null)
-			{
-				return false;
-			}
-			return Native == colObj.Native;
+			return obj is CollisionObject colObj && Native == colObj.Native;
 		}
 
 		public override int GetHashCode()
@@ -398,7 +385,7 @@ namespace BulletSharp
 
 		protected internal void FreeUnmanagedHandle()
 		{
-			IntPtr userPtr = btCollisionObject_getUserPointer(Native);
+			var userPtr = btCollisionObject_getUserPointer(Native);
 			GCHandle.FromIntPtr(userPtr).Free();
 		}
 

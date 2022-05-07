@@ -16,9 +16,9 @@ namespace BulletSharp
 		private IAction _actionInterface;
 		private readonly DynamicsWorld _world;
 
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate void DebugDrawUnmanagedDelegate(IntPtr debugDrawer);
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate void UpdateActionUnmanagedDelegate(IntPtr collisionWorld, float deltaTimeStep);
 
 		private readonly DebugDrawUnmanagedDelegate _debugDraw;

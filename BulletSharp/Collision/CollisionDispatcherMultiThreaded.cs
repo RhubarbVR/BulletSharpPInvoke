@@ -7,7 +7,7 @@ namespace BulletSharp
 	{
 		public CollisionDispatcherMultiThreaded(CollisionConfiguration configuration, int grainSize = 40)
 		{
-			IntPtr native = btCollisionDispatcherMt_new(configuration.Native, grainSize);
+			var native = btCollisionDispatcherMt_new(configuration.Native, grainSize);
 			InitializeUserOwned(native);
 
 			_collisionConfiguration = configuration;

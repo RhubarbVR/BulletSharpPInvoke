@@ -8,7 +8,7 @@ namespace BulletSharp
 {
 	public abstract class TriangleCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate void ProcessTriangleDelegate(IntPtr triangle, int partId, int triangleIndex);
 
 		private readonly ProcessTriangleDelegate _processTriangle;
@@ -42,7 +42,7 @@ namespace BulletSharp
 
 	public abstract class InternalTriangleIndexCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		delegate void InternalProcessTriangleIndexDelegate(IntPtr triangle, int partId, int triangleIndex);
 
 		private readonly InternalProcessTriangleIndexDelegate _internalProcessTriangleIndex;

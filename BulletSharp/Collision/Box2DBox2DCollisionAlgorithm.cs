@@ -16,7 +16,7 @@ namespace BulletSharp
 			public CreateFunc()
 				: base(ConstructionInfo.Null)
 			{
-				IntPtr native = btBox2dBox2dCollisionAlgorithm_CreateFunc_new();
+				var native = btBox2dBox2dCollisionAlgorithm_CreateFunc_new();
 				InitializeUserOwned(native);
 			}
 
@@ -35,14 +35,14 @@ namespace BulletSharp
 
 		public Box2DBox2DCollisionAlgorithm(CollisionAlgorithmConstructionInfo ci)
 		{
-			IntPtr native = btBox2dBox2dCollisionAlgorithm_new(ci.Native);
+			var native = btBox2dBox2dCollisionAlgorithm_new(ci.Native);
 			InitializeUserOwned(native);
 		}
 
 		public Box2DBox2DCollisionAlgorithm(PersistentManifold mf, CollisionAlgorithmConstructionInfo ci,
 			CollisionObjectWrapper body0Wrap, CollisionObjectWrapper body1Wrap)
 		{
-			IntPtr native = btBox2dBox2dCollisionAlgorithm_new2(mf.Native, ci.Native, body0Wrap.Native,
+			var native = btBox2dBox2dCollisionAlgorithm_new2(mf.Native, ci.Native, body0Wrap.Native,
 				body1Wrap.Native);
 			InitializeUserOwned(native);
 		}

@@ -5,13 +5,13 @@ namespace BulletSharp
 {
 	public class CollisionAlgorithmCreateFunc : BulletDisposableObject
 	{
-		internal CollisionAlgorithmCreateFunc(ConstructionInfo info)
+		internal CollisionAlgorithmCreateFunc(ConstructionInfo _)
 		{
 		}
 
 		public CollisionAlgorithmCreateFunc()
 		{
-			IntPtr native = btCollisionAlgorithmCreateFunc_new();
+			var native = btCollisionAlgorithmCreateFunc_new();
 			InitializeUserOwned(native);
 		}
 

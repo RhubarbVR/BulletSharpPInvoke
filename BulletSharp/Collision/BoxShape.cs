@@ -8,19 +8,19 @@ namespace BulletSharp
 	{
 		public BoxShape(Vector3 boxHalfExtents)
 		{
-			IntPtr native = btBoxShape_new(ref boxHalfExtents);
+			var native = btBoxShape_new(ref boxHalfExtents);
 			InitializeCollisionShape(native);
 		}
 
 		public BoxShape(float boxHalfExtent)
 		{
-			IntPtr native = btBoxShape_new2(boxHalfExtent);
+			var native = btBoxShape_new2(boxHalfExtent);
 			InitializeCollisionShape(native);
 		}
 
 		public BoxShape(float boxHalfExtentX, float boxHalfExtentY, float boxHalfExtentZ)
 		{
-			IntPtr native = btBoxShape_new3(boxHalfExtentX, boxHalfExtentY, boxHalfExtentZ);
+			var native = btBoxShape_new3(boxHalfExtentX, boxHalfExtentY, boxHalfExtentZ);
 			InitializeCollisionShape(native);
 		}
 
@@ -33,8 +33,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBoxShape_getHalfExtentsWithMargin(Native, out value);
+				btBoxShape_getHalfExtentsWithMargin(Native, out var value);
 				return value;
 			}
 		}
@@ -43,8 +42,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBoxShape_getHalfExtentsWithoutMargin(Native, out value);
+				btBoxShape_getHalfExtentsWithoutMargin(Native, out var value);
 				return value;
 			}
 		}

@@ -19,7 +19,7 @@ namespace BulletSharp
 
 	public class CollisionDispatcher : Dispatcher
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate void NearCallbackUnmanagedDelegate(IntPtr collisionPair, IntPtr dispatcher, IntPtr dispatchInfo);
 
 		protected CollisionConfiguration _collisionConfiguration;
@@ -34,7 +34,7 @@ namespace BulletSharp
 
 		public CollisionDispatcher(CollisionConfiguration collisionConfiguration)
 		{
-			IntPtr native = btCollisionDispatcher_new(collisionConfiguration.Native);
+			var native = btCollisionDispatcher_new(collisionConfiguration.Native);
 			InitializeUserOwned(native);
 
 			_collisionConfiguration = collisionConfiguration;

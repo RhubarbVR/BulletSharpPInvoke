@@ -197,9 +197,9 @@ namespace BulletSharp.SoftBody
 	{
 		public class IControl : BulletDisposableObject
 		{
-			[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+			[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 			private delegate void PrepareUnmanagedDelegate(IntPtr angularJoint);
-			[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+			[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 			private delegate float SpeedUnmanagedDelegate(IntPtr angularJoint, float current);
 
 			private readonly PrepareUnmanagedDelegate _prepare;
@@ -1204,7 +1204,7 @@ namespace BulletSharp.SoftBody
 	{
 		internal IntPtr Native;
 
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate float EvalUnmanagedDelegate([In] ref Vector3 x);
 
 		private EvalUnmanagedDelegate _eval;

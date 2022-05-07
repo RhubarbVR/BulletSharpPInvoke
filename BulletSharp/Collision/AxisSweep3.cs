@@ -11,7 +11,7 @@ namespace BulletSharp
 		public AxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, ushort maxHandles = 16384,
 			OverlappingPairCache pairCache = null, bool disableRaycastAccelerator = false)
 		{
-			IntPtr native = btAxisSweep3_new(ref worldAabbMin, ref worldAabbMax, maxHandles,
+			var native = btAxisSweep3_new(ref worldAabbMin, ref worldAabbMax, maxHandles,
 				pairCache?.Native ?? IntPtr.Zero, disableRaycastAccelerator);
 			InitializeUserOwned(native);
 
@@ -20,16 +20,14 @@ namespace BulletSharp
 		}
 
 		public ushort AddHandle(Vector3 aabbMin, Vector3 aabbMax, IntPtr pOwner,
-			int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher,
-			IntPtr multiSapProxy)
-		{
+			int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher) {
 			return btAxisSweep3_addHandle(Native, ref aabbMin, ref aabbMax, pOwner,
 				collisionFilterGroup, collisionFilterMask, dispatcher.Native);
 		}
 
 		public ushort AddHandleRef(ref Vector3 aabbMin, ref Vector3 aabbMax, IntPtr pOwner,
 			int collisionFilterGroup, int collisionFilterMask,
-			Dispatcher dispatcher, IntPtr multiSapProxy)
+			Dispatcher dispatcher)
 		{
 			return btAxisSweep3_addHandle(Native, ref aabbMin, ref aabbMax, pOwner,
 				collisionFilterGroup, collisionFilterMask, dispatcher.Native);
@@ -95,7 +93,7 @@ namespace BulletSharp
 		public AxisSweep3_32Bit(Vector3 worldAabbMin, Vector3 worldAabbMax, uint maxHandles = 1500000,
 			OverlappingPairCache pairCache = null, bool disableRaycastAccelerator = false)
 		{
-			IntPtr native = bt32BitAxisSweep3_new(ref worldAabbMin, ref worldAabbMax, maxHandles,
+			var native = bt32BitAxisSweep3_new(ref worldAabbMin, ref worldAabbMax, maxHandles,
 				pairCache?.Native ?? IntPtr.Zero, disableRaycastAccelerator);
 			InitializeUserOwned(native);
 
@@ -104,7 +102,7 @@ namespace BulletSharp
 		}
 
 		public uint AddHandle(Vector3 aabbMin, Vector3 aabbMax, IntPtr pOwner, int collisionFilterGroup,
-			int collisionFilterMask, Dispatcher dispatcher, IntPtr multiSapProxy)
+			int collisionFilterMask, Dispatcher dispatcher)
 		{
 			return bt32BitAxisSweep3_addHandle(Native, ref aabbMin, ref aabbMax,
 				pOwner, collisionFilterGroup, collisionFilterMask, dispatcher.Native);
@@ -112,7 +110,7 @@ namespace BulletSharp
 
 		public uint AddHandleRef(ref Vector3 aabbMin, ref Vector3 aabbMax, IntPtr pOwner,
 			int collisionFilterGroup, int collisionFilterMask,
-			Dispatcher dispatcher, IntPtr multiSapProxy)
+			Dispatcher dispatcher)
 		{
 			return bt32BitAxisSweep3_addHandle(Native, ref aabbMin, ref aabbMax,
 				pOwner, collisionFilterGroup, collisionFilterMask, dispatcher.Native);

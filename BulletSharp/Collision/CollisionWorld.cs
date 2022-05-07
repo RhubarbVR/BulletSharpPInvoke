@@ -126,9 +126,9 @@ namespace BulletSharp
 
 	public abstract class ContactResultCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate float AddSingleResultUnmanagedDelegate(IntPtr cp, IntPtr colObj0Wrap, int partId0, int index0, IntPtr colObj1Wrap, int partId1, int index1);
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;
@@ -189,9 +189,9 @@ namespace BulletSharp
 
 	public abstract class ConvexResultCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate float AddSingleResultUnmanagedDelegate(IntPtr convexResult, bool normalInWorldSpace);
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;
@@ -392,9 +392,9 @@ namespace BulletSharp
 
 	public abstract class RayResultCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate float AddSingleResultUnmanagedDelegate(IntPtr rayResult, bool normalInWorldSpace);
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;

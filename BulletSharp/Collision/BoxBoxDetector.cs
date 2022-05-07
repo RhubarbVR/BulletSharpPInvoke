@@ -10,7 +10,7 @@ namespace BulletSharp
 
 		public BoxBoxDetector(BoxShape box1, BoxShape box2)
 		{
-			IntPtr native = btBoxBoxDetector_new(box1.Native, box2.Native);
+			var native = btBoxBoxDetector_new(box1.Native, box2.Native);
 			InitializeUserOwned(native);
 
 			_box1 = box1;

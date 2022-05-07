@@ -45,8 +45,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Matrix4x4 value;
-				btCollisionObjectWrapper_getWorldTransform(Native, out value);
+				btCollisionObjectWrapper_getWorldTransform(Native, out var value);
 				return value;
 			}
 		}

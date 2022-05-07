@@ -8,9 +8,9 @@ namespace BulletSharp
 {
 	public abstract class MotionState : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate void GetWorldTransformUnmanagedDelegate(out Matrix4x4 worldTrans);
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate void SetWorldTransformUnmanagedDelegate(ref Matrix4x4 worldTrans);
 
 		private readonly GetWorldTransformUnmanagedDelegate _getWorldTransform;

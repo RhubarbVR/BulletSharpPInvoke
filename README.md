@@ -1,4 +1,10 @@
 # BulletSharp
+
+Edited to ad better support for netstandard to run inside of [RhubarbVR](https://github.com/RhubarbVR/RhubarbVR/) 
+
+Need to load libs by running 
+Native.Load();
+
 BulletSharp is a .NET wrapper for the [Bullet](https://pybullet.org/) physics library.
 
 This version uses Platform Invoke. There is also an equivalent version written in C++/CLI: https://github.com/AndresTraks/BulletSharp

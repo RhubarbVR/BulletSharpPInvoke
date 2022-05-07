@@ -8,12 +8,12 @@ namespace BulletSharp
 {
 	public abstract class BroadphaseAabbCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		internal delegate bool ProcessUnmanagedDelegate(IntPtr proxy);
 
 		internal ProcessUnmanagedDelegate _process;
 
-		internal BroadphaseAabbCallback(ConstructionInfo info)
+		internal BroadphaseAabbCallback(ConstructionInfo _)
 		{
 			_process = ProcessUnmanaged;
 		}
@@ -21,7 +21,7 @@ namespace BulletSharp
 		protected BroadphaseAabbCallback()
 		{
 			_process = ProcessUnmanaged;
-			IntPtr native = btBroadphaseAabbCallbackWrapper_new(
+			var native = btBroadphaseAabbCallbackWrapper_new(
 				Marshal.GetFunctionPointerForDelegate(_process));
 			InitializeUserOwned(native);
 		}
@@ -46,7 +46,7 @@ namespace BulletSharp
 		protected BroadphaseRayCallback()
 			: base(ConstructionInfo.Null)
 		{
-			IntPtr native = btBroadphaseRayCallbackWrapper_new(
+			var native = btBroadphaseRayCallbackWrapper_new(
 				Marshal.GetFunctionPointerForDelegate(_process));
 			InitializeUserOwned(native);
 		}
@@ -61,8 +61,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBroadphaseRayCallback_getRayDirectionInverse(Native, out value);
+				btBroadphaseRayCallback_getRayDirectionInverse(Native, out var value);
 				return value;
 			}
 			set => btBroadphaseRayCallback_setRayDirectionInverse(Native, ref value);

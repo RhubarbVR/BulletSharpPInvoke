@@ -24,7 +24,7 @@ namespace BulletSharp
 
 	public abstract class OverlapFilterCallback : BulletDisposableObject
 	{
-		[UnmanagedFunctionPointer(BulletSharp.Native.Conv), SuppressUnmanagedCodeSecurity]
+		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate bool NeedBroadphaseCollisionUnmanagedDelegate(IntPtr proxy0, IntPtr proxy1);
 
 		private NeedBroadphaseCollisionUnmanagedDelegate _needBroadphaseCollision;

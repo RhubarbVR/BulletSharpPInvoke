@@ -74,9 +74,9 @@ namespace BulletSharp
 				return null;
 			}
 
-			IntPtr clientObjectPtr = btBroadphaseProxy_getClientObject(native);
+			var clientObjectPtr = btBroadphaseProxy_getClientObject(native);
 			if (clientObjectPtr != IntPtr.Zero) {
-				CollisionObject clientObject = CollisionObject.GetManaged(clientObjectPtr);
+				var clientObject = CollisionObject.GetManaged(clientObjectPtr);
 				return clientObject.BroadphaseHandle;
 			}
 
@@ -128,8 +128,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBroadphaseProxy_getAabbMax(Native, out value);
+				btBroadphaseProxy_getAabbMax(Native, out var value);
 				return value;
 			}
 			set => btBroadphaseProxy_setAabbMax(Native, ref value);
@@ -139,8 +138,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				Vector3 value;
-				btBroadphaseProxy_getAabbMin(Native, out value);
+				btBroadphaseProxy_getAabbMin(Native, out var value);
 				return value;
 			}
 			set => btBroadphaseProxy_setAabbMin(Native, ref value);
@@ -150,7 +148,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				IntPtr clientObjectPtr = btBroadphaseProxy_getClientObject(Native);
+				var clientObjectPtr = btBroadphaseProxy_getClientObject(Native);
 				if (clientObjectPtr != IntPtr.Zero)
 				{
 					_clientObject = CollisionObject.GetManaged(clientObjectPtr);
@@ -159,13 +157,10 @@ namespace BulletSharp
 			}
 			set
 			{
-				var collisionObject = value as CollisionObject;
-				if (collisionObject != null)
-				{
+				if (value is CollisionObject collisionObject) {
 					btBroadphaseProxy_setClientObject(Native, collisionObject.Native);
 				}
-				else if (value == null)
-				{
+				else if (value == null) {
 					btBroadphaseProxy_setClientObject(Native, IntPtr.Zero);
 				}
 				_clientObject = value;
@@ -204,7 +199,7 @@ namespace BulletSharp
 		{
 			get
 			{
-				IntPtr valuePtr = btBroadphasePair_getAlgorithm(Native);
+				var valuePtr = btBroadphasePair_getAlgorithm(Native);
 				return (valuePtr == IntPtr.Zero) ? null : new CollisionAlgorithm(valuePtr, this);
 			}
 			set => btBroadphasePair_setAlgorithm(Native, (value.Native == IntPtr.Zero) ? IntPtr.Zero : value.Native);

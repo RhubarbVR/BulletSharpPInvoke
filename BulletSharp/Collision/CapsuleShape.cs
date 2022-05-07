@@ -12,7 +12,7 @@ namespace BulletSharp
 
 		public CapsuleShape(float radius, float height)
 		{
-			IntPtr native = btCapsuleShape_new(radius, height);
+			var native = btCapsuleShape_new(radius, height);
 			InitializeCollisionShape(native);
 		}
 
@@ -27,7 +27,7 @@ namespace BulletSharp
 	{
 		public CapsuleShapeX(float radius, float height)
 		{
-			IntPtr native = btCapsuleShapeX_new(radius, height);
+			var native = btCapsuleShapeX_new(radius, height);
 			InitializeCollisionShape(native);
 		}
 	}
@@ -36,7 +36,7 @@ namespace BulletSharp
 	{
 		public CapsuleShapeZ(float radius, float height)
 		{
-			IntPtr native = btCapsuleShapeZ_new(radius, height);
+			var native = btCapsuleShapeZ_new(radius, height);
 			InitializeCollisionShape(native);
 		}
 	}

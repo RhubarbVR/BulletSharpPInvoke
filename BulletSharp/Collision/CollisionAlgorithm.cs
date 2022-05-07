@@ -10,7 +10,7 @@ namespace BulletSharp
 
 		public CollisionAlgorithmConstructionInfo()
 		{
-			IntPtr native = btCollisionAlgorithmConstructionInfo_new();
+			var native = btCollisionAlgorithmConstructionInfo_new();
 			InitializeUserOwned(native);
 		}
 
