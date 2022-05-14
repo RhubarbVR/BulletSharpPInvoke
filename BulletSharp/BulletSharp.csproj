@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFrameworks>netstandard2.0;netstandard2.1;net6;net5;</TargetFrameworks>
@@ -39,13 +39,6 @@ Forked from https://github.com/AndresTraks/BulletSharpPInvoke </Description>
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </Content>
-	  <Content Include="runtimes/**/*.*" copyToOutput="true">
-		  <IncludeInPackage>true</IncludeInPackage>
-		  <CopyToOutput>true</CopyToOutput>
-		  <BuildAction>Content</BuildAction>
-		  <copyToOutput>true</copyToOutput>
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
   </ItemGroup>
 
 	
@@ -55,6 +48,21 @@ Forked from https://github.com/AndresTraks/BulletSharpPInvoke </Description>
 	
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Update="runtimes\linux-arm64\native\liblibbulletc.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="runtimes\linux-x64\native\liblibbulletc.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="runtimes\win-x64\native\libbulletc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="runtimes\win10-x64\native\libbulletc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

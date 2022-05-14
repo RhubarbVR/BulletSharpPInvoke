@@ -92,6 +92,10 @@ namespace BulletSharp
 			_collisionAlgorithmPool = constructionInfo.CollisionAlgorithmPool;
 			_persistentManifoldPool = constructionInfo.PersistentManifoldPool;
 
+			if(constructionInfo.Native == IntPtr.Zero) {
+				throw new ArgumentNullException(nameof(constructionInfo) + ".Native");
+			}
+
 			IntPtr native = btDefaultCollisionConfiguration_new2(constructionInfo.Native);
 			InitializeUserOwned(native);
 		}

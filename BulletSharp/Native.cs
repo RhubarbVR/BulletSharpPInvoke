@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace BulletSharp
@@ -71,12 +72,38 @@ namespace BulletSharp
 
         [DllImport("libdl", CharSet = CharSet.Ansi)]
         static extern IntPtr dlopen(string fileName, int flags);
+
+		static bool Dlcopy(string fileName) {
+			if (File.Exists(fileName)) {
+				try {
+					File.Copy(fileName, $"{ AppDomain.CurrentDomain.BaseDirectory}/libbulletc.so");
+				}
+				catch {
+				}
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
         static bool LoadUnix(string arch)
         {
             const int RTLD_NOW = 2;
-            return dlopen("libbulletc.so", RTLD_NOW) != IntPtr.Zero
-                || dlopen($"./runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
-                || dlopen($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero;
+			try {
+				return dlopen("libbulletc.so", RTLD_NOW) != IntPtr.Zero
+				|| dlopen($"./runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
+				|| dlopen($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
+				|| Dlcopy("libbulletc.so")
+				|| Dlcopy($"./runtimes/linux-{arch}/native/libbulletc.so")
+				|| Dlcopy($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so");
+			}
+			catch {
+				//This is if libdl is not working for some reson
+				return Dlcopy("libbulletc.so")
+				|| Dlcopy($"./runtimes/linux-{arch}/native/libbulletc.so")
+				|| Dlcopy($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so");
+			}
         }
 
         public const string DLL = "libbulletc";
