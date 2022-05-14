@@ -87,21 +87,53 @@ namespace BulletSharp
 			}
 		}
 
-        static bool LoadUnix(string arch)
+		static bool FinalTryUnix(string fileName) {
+			var dirs = Directory.GetDirectories("./../");
+			foreach (var item in dirs) {
+				if(item.Contains("runtimes")) {
+					return dlopen(item + "/" + fileName, 2) != IntPtr.Zero
+						|| Dlcopy(item + "/" + fileName);
+				}
+				var dirs2 = Directory.GetDirectories(item);
+				foreach (var item2 in dirs) {
+					if (item2.Contains("runtimes")) {
+						return dlopen(item + "/" + fileName, 2) != IntPtr.Zero
+							|| Dlcopy(item + "/" + fileName);
+					}
+					var dirs3 = Directory.GetDirectories(item2);
+					foreach (var item3 in dirs) {
+						if (item3.Contains("runtimes")) {
+							return dlopen(item + "/" + fileName, 2) != IntPtr.Zero
+								|| Dlcopy(item + "/" + fileName);
+						}
+					}
+				}
+			}
+			return false;
+		}
+
+		static bool LoadUnix(string arch)
         {
             const int RTLD_NOW = 2;
 			try {
 				return dlopen("libbulletc.so", RTLD_NOW) != IntPtr.Zero
 				|| dlopen($"./runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
+				|| dlopen($"./../runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
+				|| dlopen($"./../../runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
 				|| dlopen($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so", RTLD_NOW) != IntPtr.Zero
 				|| Dlcopy("libbulletc.so")
 				|| Dlcopy($"./runtimes/linux-{arch}/native/libbulletc.so")
-				|| Dlcopy($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so");
+				|| Dlcopy($"./../runtimes/linux-{arch}/native/libbulletc.so")
+				|| Dlcopy($"./../../runtimes/linux-{arch}/native/libbulletc.so")
+				|| Dlcopy($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so")
+				|| FinalTryUnix($"linux-{arch}/native/libbulletc.so");
 			}
 			catch {
 				//This is if libdl is not working for some reson
 				return Dlcopy("libbulletc.so")
 				|| Dlcopy($"./runtimes/linux-{arch}/native/libbulletc.so")
+				|| Dlcopy($"./../runtimes/linux-{arch}/native/libbulletc.so")
+				|| Dlcopy($"./../../runtimes/linux-{arch}/native/libbulletc.so")
 				|| Dlcopy($"{AppDomain.CurrentDomain.BaseDirectory}/runtimes/linux-{arch}/native/libbulletc.so");
 			}
         }
