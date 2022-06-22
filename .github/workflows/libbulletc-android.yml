@@ -1,4 +1,4 @@
-name: libbulletc-droid
+name: libbulletc-android
 
 on:
   push:
