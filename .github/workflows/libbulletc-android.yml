@@ -62,7 +62,7 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: libbulletc-${ANDROID_ABI}
+        name: libbulletc-${{ env.ANDROID_ABI }}-via-${{ runner.os }}
         path: libbulletc/liblibbulletc.so
 
     - name: Setup .NET Core
