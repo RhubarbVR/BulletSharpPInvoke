@@ -33,7 +33,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: libbulletc-${{ runner.os }}
-        path: libbulletc/liblibbulletc.dll
+        path: libbulletc/lib/libbulletc.dll
 
     - name: Setup .NET Core
       if: false
