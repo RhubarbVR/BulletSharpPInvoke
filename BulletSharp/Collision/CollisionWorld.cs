@@ -393,31 +393,41 @@ namespace BulletSharp
 	public abstract class RayResultCallback : BulletDisposableObject
 	{
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate float AddSingleResultUnmanagedDelegate(IntPtr rayResult, bool normalInWorldSpace);
+		private delegate float AddSingleResultUnmanagedDelegate(IntPtr targetScript, IntPtr rayResult, bool normalInWorldSpace);
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr proxy0);
+		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr targetScript, IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;
 		private readonly NeedsCollisionUnmanagedDelegate _needsCollision;
 
 		protected RayResultCallback()
 		{
-			_addSingleResult = AddSingleResultUnmanaged;
-			_needsCollision = NeedsCollisionUnmanaged;
+			_addSingleResult = AddSingleResultUnmanaged_Static;
+			_needsCollision = NeedsCollisionUnmanaged_Static;
 
-			IntPtr native = btCollisionWorld_RayResultCallbackWrapper_new(
+			var native = btCollisionWorld_RayResultCallbackWrapper_new(
 				Marshal.GetFunctionPointerForDelegate(_addSingleResult),
 				Marshal.GetFunctionPointerForDelegate(_needsCollision));
+			_nativeAddSingleResult.Add(native, this);
 			InitializeUserOwned(native);
 		}
+
+		internal static Dictionary<IntPtr, RayResultCallback> _nativeAddSingleResult = new();
+
+		internal static float AddSingleResultUnmanaged_Static(IntPtr obj, IntPtr rayResult, bool normalInWorldSpace) {
+			return _nativeAddSingleResult[obj].AddSingleResultUnmanaged(rayResult, normalInWorldSpace);
+		}
+		internal static bool NeedsCollisionUnmanaged_Static(IntPtr obj, IntPtr proxy0) {
+			return _nativeAddSingleResult[obj].NeedsCollisionUnmanaged(proxy0);
+		}
+
+		public abstract float AddSingleResult(ref LocalRayResult rayResult, bool normalInWorldSpace);
 
 		private float AddSingleResultUnmanaged(IntPtr rayResult, bool normalInWorldSpace)
 		{
 			var localRayResult = new LocalRayResult(rayResult);
 			return AddSingleResult(ref localRayResult, normalInWorldSpace);
 		}
-
-		public abstract float AddSingleResult(ref LocalRayResult rayResult, bool normalInWorldSpace);
 
 		private bool NeedsCollisionUnmanaged(IntPtr proxy0)
 		{
@@ -464,6 +474,7 @@ namespace BulletSharp
 		protected override void Dispose(bool disposing)
 		{
 			btCollisionWorld_RayResultCallback_delete(Native);
+			_nativeAddSingleResult.Remove(Native);
 		}
 	}
 

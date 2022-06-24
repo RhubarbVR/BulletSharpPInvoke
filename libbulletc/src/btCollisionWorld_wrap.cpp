@@ -20,16 +20,16 @@ btScalar btCollisionWorld_ContactResultCallbackWrapper::addSingleResult(btManifo
 	const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
 	int partId1, int index1)
 {
-	return _addSingleResultCallback(cp, colObj0Wrap, partId0, index0, colObj1Wrap,
+	return _addSingleResultCallback(this,cp, colObj0Wrap, partId0, index0, colObj1Wrap,
 		partId1, index1);
 }
 
-bool btCollisionWorld_ContactResultCallbackWrapper::needsCollision(btBroadphaseProxy* proxy0) const
+bool btCollisionWorld_ContactResultCallbackWrapper::needsCollision(btBroadphaseProxy* proxy0) 
 {
-	return _needsCollisionCallback(proxy0);
+	return _needsCollisionCallback(this, proxy0);
 }
 
-bool btCollisionWorld_ContactResultCallbackWrapper::baseNeedsCollision(btBroadphaseProxy* proxy0) const
+bool btCollisionWorld_ContactResultCallbackWrapper::baseNeedsCollision(btBroadphaseProxy* proxy0) 
 {
 	return btCollisionWorld_ContactResultCallback::needsCollision(proxy0);
 }

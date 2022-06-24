@@ -11,10 +11,12 @@
 #define btCollisionWorld_ConvexResultCallbackWrapper void
 #define btCollisionWorld_RayResultCallbackWrapper void
 #else
-typedef btScalar (*p_btCollisionWorld_ContactResultCallback_addSingleResult)(btManifoldPoint& cp,
+
+typedef btScalar (*p_btCollisionWorld_ContactResultCallback_addSingleResult)(void* objec,btManifoldPoint& cp,
 	const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
 	int partId1, int index1);
-typedef bool (*p_btCollisionWorld_ContactResultCallback_needsCollision)(btBroadphaseProxy* proxy0);
+
+typedef bool (*p_btCollisionWorld_ContactResultCallback_needsCollision)(void* objec, btBroadphaseProxy* proxy0);
 
 class btCollisionWorld_ContactResultCallbackWrapper : public btCollisionWorld_ContactResultCallback
 {
@@ -29,9 +31,9 @@ public:
 	virtual btScalar addSingleResult(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap,
 		int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1,
 		int index1);
-	virtual bool needsCollision(btBroadphaseProxy* proxy0) const;
+	virtual bool needsCollision(btBroadphaseProxy* proxy0);
 
-	virtual bool baseNeedsCollision(btBroadphaseProxy* proxy0) const;
+	virtual bool baseNeedsCollision(btBroadphaseProxy* proxy0);
 };
 
 typedef btScalar (*p_btCollisionWorld_ConvexResultCallback_addSingleResult)(btCollisionWorld_LocalConvexResult& convexResult,
