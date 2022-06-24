@@ -1,0 +1,51 @@
+name: NativeWin
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.runs-on }}
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install ninja-build tool
+      uses: seanmiddleditch/gha-setup-ninja@v3
+
+    - name: fetch bullet
+      run: git clone --quiet -b 3.24 https://github.com/bulletphysics/bullet3.git
+      
+    - name: generate cmake
+      run: |
+        cd libbulletc
+        cmake -G Ninja ../libbulletc -DBULLET_INCLUDE_DIR=$PWD/../bullet3/src
+    - name: compile libbulletc
+      run: ninja -C libbulletc
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: libbulletc-${{ runner.os }}
+        path: libbulletc/liblibbulletc.dll
+
+    - name: Setup .NET Core
+      if: false
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      if: false
+      run: dotnet restore BulletSharp/BulletSharp.DotNetCore.csproj
+    - name: Build
+      if: false
+      run: dotnet build --configuration Release --no-restore BulletSharp/BulletSharp.DotNetCore.csproj
+    - name: Test
+      if: false
+      run: dotnet test --no-restore --verbosity normal BulletSharp/BulletSharp.DotNetCore.csproj
