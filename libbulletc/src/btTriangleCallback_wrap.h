@@ -6,8 +6,9 @@
 #define btInternalTriangleIndexCallbackWrapper void
 #define btTriangleCallbackWrapper void
 #else
+#ifdef _WIN32
 typedef unsigned long long uint64_t;
-
+#endif
 typedef void (*p_btInternalTriangleIndexCallback_internalProcessTriangleIndex)(uint64_t target, btVector3* triangle,
 	int partId, int triangleIndex);
 
