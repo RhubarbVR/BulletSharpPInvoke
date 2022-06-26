@@ -123,6 +123,8 @@ namespace BulletSharp
 
 		public Serializer()
 		{
+			//Removed to make il2cpp work
+			throw new NotImplementedException();
 			_allocate = new AllocateUnmanagedDelegate(AllocateUnmanaged);
 			_finalizeChunk = new FinalizeChunkUnmanagedDelegate(FinalizeChunk);
 			_findNameForPointer = new FindNameForPointerUnmanagedDelegate(FindNameForPointer);

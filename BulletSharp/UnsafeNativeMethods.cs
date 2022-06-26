@@ -978,7 +978,7 @@ namespace BulletSharp
 		public static extern void btCollisionWorld_ContactResultCallback_delete(IntPtr obj);
 
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
-		public static extern IntPtr btCollisionWorld_ContactResultCallbackWrapper_new(IntPtr addSingleResult, IntPtr needsCollision);
+		public static extern IntPtr btCollisionWorld_ContactResultCallbackWrapper_new(IntPtr addSingleResult, IntPtr needsCollision, ulong target);
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
 		[return: MarshalAs(UnmanagedType.I1)]
 		public static extern bool btCollisionWorld_ContactResultCallbackWrapper_needsCollision(IntPtr obj, IntPtr proxy0);
@@ -1002,7 +1002,7 @@ namespace BulletSharp
 		public static extern void btCollisionWorld_ConvexResultCallback_delete(IntPtr obj);
 
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
-		public static extern IntPtr btCollisionWorld_ConvexResultCallbackWrapper_new(IntPtr addSingleResult, IntPtr needsCollision);
+		public static extern IntPtr btCollisionWorld_ConvexResultCallbackWrapper_new(IntPtr addSingleResult, IntPtr needsCollision, ulong target);
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
 		[return: MarshalAs(UnmanagedType.I1)]
 		public static extern bool btCollisionWorld_ConvexResultCallbackWrapper_needsCollision(IntPtr obj, IntPtr proxy0);
@@ -1073,7 +1073,7 @@ namespace BulletSharp
 		public static extern void btCollisionWorld_RayResultCallback_delete(IntPtr obj);
 
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
-		public static extern IntPtr btCollisionWorld_RayResultCallbackWrapper_new(IntPtr addSingleResult, IntPtr needsCollision);
+		public static extern IntPtr btCollisionWorld_RayResultCallbackWrapper_new(IntPtr addSingleResult, IntPtr needsCollision,ulong target);
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
 		[return: MarshalAs(UnmanagedType.I1)]
 		public static extern bool btCollisionWorld_RayResultCallbackWrapper_needsCollision(IntPtr obj, IntPtr proxy0);
@@ -3169,7 +3169,7 @@ namespace BulletSharp
 		public static extern void btIndexedMesh_delete(IntPtr obj);
 
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
-		public static extern IntPtr btInternalTriangleIndexCallbackWrapper_new(IntPtr internalProcessTriangleIndexCallback);
+		public static extern IntPtr btInternalTriangleIndexCallbackWrapper_new(IntPtr internalProcessTriangleIndexCallback, ulong target);
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
 		public static extern void btInternalTriangleIndexCallback_delete(IntPtr obj);
 
@@ -5908,7 +5908,7 @@ namespace BulletSharp
 		public static extern void btSoftBody_Feature_setMaterial(IntPtr obj, IntPtr value);
 
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
-		public static extern IntPtr btSoftBody_ImplicitFnWrapper_new(IntPtr evalCallback);
+		public static extern IntPtr btSoftBody_ImplicitFnWrapper_new(IntPtr evalCallback,ulong target);
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
 		public static extern void btSoftBody_ImplicitFn_delete(IntPtr obj);
 
@@ -6794,7 +6794,7 @@ namespace BulletSharp
 		public static extern IntPtr btTriangleBuffer_getTriangle(IntPtr obj, int index);
 
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
-		public static extern IntPtr btTriangleCallbackWrapper_new(IntPtr internalProcessTriangleIndexCallback);
+		public static extern IntPtr btTriangleCallbackWrapper_new(IntPtr internalProcessTriangleIndexCallback,ulong target);
 		[DllImport(Native.DLL, CallingConvention = Native.CONV)]
 		public static extern void btTriangleCallback_delete(IntPtr obj);
 

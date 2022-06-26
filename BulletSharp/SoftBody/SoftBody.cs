@@ -1205,15 +1205,18 @@ namespace BulletSharp.SoftBody
 		internal IntPtr Native;
 
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate float EvalUnmanagedDelegate([In] ref Vector3 x);
+		private delegate float EvalUnmanagedDelegate(ulong target,[In] ref Vector3 x);
 
 		private EvalUnmanagedDelegate _eval;
 
 		protected ImplicitFn()
 		{
 			_eval = Eval;
-
-			Native = btSoftBody_ImplicitFnWrapper_new(Marshal.GetFunctionPointerForDelegate(_eval));
+			var val = IntRef.LoadValueIn(this);
+			Native = btSoftBody_ImplicitFnWrapper_new(Marshal.GetFunctionPointerForDelegate(_eval),val);
+		}
+		public static float Eval(ulong target,ref Vector3 x) {
+			return IntRef.GetValue<ImplicitFn>(target).Eval(ref x);
 		}
 
 		public abstract float Eval(ref Vector3 x);

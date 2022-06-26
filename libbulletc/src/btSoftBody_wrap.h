@@ -28,15 +28,15 @@ public:
 	void setWrapperData(void* data);
 };
 
-typedef btScalar (*p_btSoftBody_ImplicitFn_Eval)(const btVector3* x);
+typedef btScalar (*p_btSoftBody_ImplicitFn_Eval)(uint64_t target,const btVector3* x);
 
 class btSoftBody_ImplicitFnWrapper : public btSoftBody_ImplicitFn
 {
 private:
 	p_btSoftBody_ImplicitFn_Eval _EvalCallback;
-
+	uint64_t _target;
 public:
-	btSoftBody_ImplicitFnWrapper(p_btSoftBody_ImplicitFn_Eval EvalCallback);
+	btSoftBody_ImplicitFnWrapper(p_btSoftBody_ImplicitFn_Eval EvalCallback, uint64_t target);
 
 	virtual btScalar Eval(const btVector3& x);
 };
@@ -256,7 +256,7 @@ extern "C" {
 	EXPORT btSoftBody_Material* btSoftBody_Feature_getMaterial(btSoftBody_Feature* obj);
 	EXPORT void btSoftBody_Feature_setMaterial(btSoftBody_Feature* obj, btSoftBody_Material* value);
 
-	EXPORT btSoftBody_ImplicitFnWrapper* btSoftBody_ImplicitFnWrapper_new(p_btSoftBody_ImplicitFn_Eval EvalCallback);
+	EXPORT btSoftBody_ImplicitFnWrapper* btSoftBody_ImplicitFnWrapper_new(p_btSoftBody_ImplicitFn_Eval EvalCallback, uint64_t target);
 
 	EXPORT btScalar btSoftBody_ImplicitFn_Eval(btSoftBody_ImplicitFn* obj, const btVector3* x);
 	EXPORT void btSoftBody_ImplicitFn_delete(btSoftBody_ImplicitFn* obj);

@@ -55,8 +55,11 @@ namespace BulletSharp
 		internal bool IsUserOwned { get; private set; }
 #endif
 
+		public event Action OnDispose;
+
 		public void Dispose()
 		{
+			OnDispose?.Invoke();
 			if (IsDisposed == false)
 			{
 				Dispose(true);

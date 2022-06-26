@@ -9,20 +9,24 @@ namespace BulletSharp
 	public abstract class TriangleCallback : BulletDisposableObject
 	{
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate void ProcessTriangleDelegate(IntPtr triangle, int partId, int triangleIndex);
+		private delegate void ProcessTriangleDelegate(ulong target,IntPtr triangle, int partId, int triangleIndex);
 
 		private readonly ProcessTriangleDelegate _processTriangle;
 
 		public TriangleCallback()
 		{
 			_processTriangle = new ProcessTriangleDelegate(ProcessTriangleUnmanaged);
-
+			var e = IntRef.LoadValueIn(this);
 			IntPtr native = btTriangleCallbackWrapper_new(
-				Marshal.GetFunctionPointerForDelegate(_processTriangle));
+				Marshal.GetFunctionPointerForDelegate(_processTriangle),e);
 			InitializeUserOwned(native);
 		}
+		public static void ProcessTriangleUnmanaged(ulong target, IntPtr triangle, int partId, int triangleIndex) {
+			IntRef.GetValue<TriangleCallback>(target).ProcessTriangleUnmanaged(triangle, partId, triangleIndex);
+		}
 
-		private void ProcessTriangleUnmanaged(IntPtr triangle, int partId, int triangleIndex)
+
+		public void ProcessTriangleUnmanaged(IntPtr triangle, int partId, int triangleIndex)
 		{
 			float[] triangleData = new float[11];
 			Marshal.Copy(triangle, triangleData, 0, 11);
@@ -43,20 +47,24 @@ namespace BulletSharp
 	public abstract class InternalTriangleIndexCallback : BulletDisposableObject
 	{
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		delegate void InternalProcessTriangleIndexDelegate(IntPtr triangle, int partId, int triangleIndex);
+		delegate void InternalProcessTriangleIndexDelegate(ulong target, IntPtr triangle, int partId, int triangleIndex);
 
 		private readonly InternalProcessTriangleIndexDelegate _internalProcessTriangleIndex;
 
 		internal InternalTriangleIndexCallback()
 		{
 			_internalProcessTriangleIndex = new InternalProcessTriangleIndexDelegate(InternalProcessTriangleIndexUnmanaged);
-
+			var e = IntRef.LoadValueIn(this);
 			IntPtr native = btInternalTriangleIndexCallbackWrapper_new(
-				Marshal.GetFunctionPointerForDelegate(_internalProcessTriangleIndex));
+				Marshal.GetFunctionPointerForDelegate(_internalProcessTriangleIndex), e);
 			InitializeUserOwned(native);
 		}
 
-		private void InternalProcessTriangleIndexUnmanaged(IntPtr triangle, int partId, int triangleIndex)
+		public static void InternalProcessTriangleIndexUnmanaged(ulong target, IntPtr triangle, int partId, int triangleIndex) {
+			IntRef.GetValue<InternalTriangleIndexCallback>(target).InternalProcessTriangleIndexUnmanaged(triangle, partId, triangleIndex);
+		}
+
+		public void InternalProcessTriangleIndexUnmanaged(IntPtr triangle, int partId, int triangleIndex)
 		{
 			float[] triangleData = new float[11];
 			Marshal.Copy(triangle, triangleData, 0, 11);

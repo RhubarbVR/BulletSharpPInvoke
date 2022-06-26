@@ -127,9 +127,9 @@ namespace BulletSharp
 	public abstract class ContactResultCallback : BulletDisposableObject
 	{
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate float AddSingleResultUnmanagedDelegate(IntPtr cp, IntPtr colObj0Wrap, int partId0, int index0, IntPtr colObj1Wrap, int partId1, int index1);
+		private delegate float AddSingleResultUnmanagedDelegate(ulong target,IntPtr cp, IntPtr colObj0Wrap, int partId0, int index0, IntPtr colObj1Wrap, int partId1, int index1);
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr proxy0);
+		private delegate bool NeedsCollisionUnmanagedDelegate(ulong target, IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;
 		private readonly NeedsCollisionUnmanagedDelegate _needsCollision;
@@ -138,13 +138,16 @@ namespace BulletSharp
 		{
 			_addSingleResult = AddSingleResultUnmanaged;
 			_needsCollision = NeedsCollisionUnmanaged;
+			var e = IntRef.LoadValueIn(this);
 			IntPtr native = btCollisionWorld_ContactResultCallbackWrapper_new(
 				Marshal.GetFunctionPointerForDelegate(_addSingleResult),
-				Marshal.GetFunctionPointerForDelegate(_needsCollision));
+				Marshal.GetFunctionPointerForDelegate(_needsCollision),e);
 			InitializeUserOwned(native);
 		}
-
-		private float AddSingleResultUnmanaged(IntPtr cp, IntPtr colObj0Wrap, int partId0, int index0, IntPtr colObj1Wrap, int partId1, int index1)
+		public float AddSingleResultUnmanaged(ulong target,IntPtr cp, IntPtr colObj0Wrap, int partId0, int index0, IntPtr colObj1Wrap, int partId1, int index1) {
+			return IntRef.GetValue<ContactResultCallback>(target).AddSingleResultUnmanaged(cp,colObj0Wrap,partId0,index0,colObj1Wrap,partId1,index1);
+		}
+		public float AddSingleResultUnmanaged(IntPtr cp, IntPtr colObj0Wrap, int partId0, int index0, IntPtr colObj1Wrap, int partId1, int index1)
 		{
 			return AddSingleResult(new ManifoldPoint(cp),
 				new CollisionObjectWrapper(colObj0Wrap), partId0, index0,
@@ -152,8 +155,10 @@ namespace BulletSharp
 		}
 
 		public abstract float AddSingleResult(ManifoldPoint cp, CollisionObjectWrapper colObj0Wrap, int partId0, int index0, CollisionObjectWrapper colObj1Wrap, int partId1, int index1);
-
-		private bool NeedsCollisionUnmanaged(IntPtr proxy0)
+		public bool NeedsCollisionUnmanaged(ulong target, IntPtr proxy0) {
+			return IntRef.GetValue<ContactResultCallback>(target).NeedsCollisionUnmanaged(proxy0);
+		}
+		public bool NeedsCollisionUnmanaged(IntPtr proxy0)
 		{
 			return NeedsCollision(BroadphaseProxy.GetManaged(proxy0));
 		}
@@ -190,9 +195,9 @@ namespace BulletSharp
 	public abstract class ConvexResultCallback : BulletDisposableObject
 	{
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate float AddSingleResultUnmanagedDelegate(IntPtr convexResult, bool normalInWorldSpace);
+		private delegate float AddSingleResultUnmanagedDelegate(ulong target, IntPtr convexResult, bool normalInWorldSpace);
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr proxy0);
+		private delegate bool NeedsCollisionUnmanagedDelegate(ulong target, IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;
 		private readonly NeedsCollisionUnmanagedDelegate _needsCollision;
@@ -201,21 +206,28 @@ namespace BulletSharp
 		{
 			_addSingleResult = AddSingleResultUnmanaged;
 			_needsCollision = NeedsCollisionUnmanaged;
+			var e = IntRef.LoadValueIn(this);
 			IntPtr native = btCollisionWorld_ConvexResultCallbackWrapper_new(
 				Marshal.GetFunctionPointerForDelegate(_addSingleResult),
-				Marshal.GetFunctionPointerForDelegate(_needsCollision));
+				Marshal.GetFunctionPointerForDelegate(_needsCollision),e);
 			InitializeUserOwned(native);
 		}
 
-		private float AddSingleResultUnmanaged(IntPtr convexResult, bool normalInWorldSpace)
+		public static float AddSingleResultUnmanaged(ulong target,IntPtr convexResult, bool normalInWorldSpace) {
+			return IntRef.GetValue<ConvexResultCallback>(target).AddSingleResultUnmanaged(convexResult, normalInWorldSpace);
+		}
+
+		public float AddSingleResultUnmanaged(IntPtr convexResult, bool normalInWorldSpace)
 		{
 			var convexResultManaged = new LocalConvexResult(convexResult);
 			return AddSingleResult(ref convexResultManaged, normalInWorldSpace);
 		}
 
 		public abstract float AddSingleResult(ref LocalConvexResult convexResult, bool normalInWorldSpace);
-
-		private bool NeedsCollisionUnmanaged(IntPtr proxy0)
+		private bool NeedsCollisionUnmanaged(ulong target,IntPtr proxy0) {
+			return IntRef.GetValue<ConvexResultCallback>(target).NeedsCollisionUnmanaged(proxy0);
+		}
+		public bool NeedsCollisionUnmanaged(IntPtr proxy0)
 		{
 			return NeedsCollision(BroadphaseProxy.GetManaged(proxy0));
 		}
@@ -393,9 +405,9 @@ namespace BulletSharp
 	public abstract class RayResultCallback : BulletDisposableObject
 	{
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate float AddSingleResultUnmanagedDelegate(IntPtr targetScript, IntPtr rayResult, bool normalInWorldSpace);
+		private delegate float AddSingleResultUnmanagedDelegate(ulong targetScript, IntPtr rayResult, bool normalInWorldSpace);
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
-		private delegate bool NeedsCollisionUnmanagedDelegate(IntPtr targetScript, IntPtr proxy0);
+		private delegate bool NeedsCollisionUnmanagedDelegate(ulong targetScript, IntPtr proxy0);
 
 		private readonly AddSingleResultUnmanagedDelegate _addSingleResult;
 		private readonly NeedsCollisionUnmanagedDelegate _needsCollision;
@@ -404,21 +416,21 @@ namespace BulletSharp
 		{
 			_addSingleResult = AddSingleResultUnmanaged_Static;
 			_needsCollision = NeedsCollisionUnmanaged_Static;
-
+			var e = IntRef.LoadValueIn(this);
 			var native = btCollisionWorld_RayResultCallbackWrapper_new(
 				Marshal.GetFunctionPointerForDelegate(_addSingleResult),
-				Marshal.GetFunctionPointerForDelegate(_needsCollision));
+				Marshal.GetFunctionPointerForDelegate(_needsCollision),e);
 			_nativeAddSingleResult.Add(native, this);
 			InitializeUserOwned(native);
 		}
 
 		internal static Dictionary<IntPtr, RayResultCallback> _nativeAddSingleResult = new();
 
-		internal static float AddSingleResultUnmanaged_Static(IntPtr obj, IntPtr rayResult, bool normalInWorldSpace) {
-			return _nativeAddSingleResult[obj].AddSingleResultUnmanaged(rayResult, normalInWorldSpace);
+		internal static float AddSingleResultUnmanaged_Static(ulong obj, IntPtr rayResult, bool normalInWorldSpace) {
+			return IntRef.GetValue<RayResultCallback>(obj).AddSingleResultUnmanaged(rayResult, normalInWorldSpace);
 		}
-		internal static bool NeedsCollisionUnmanaged_Static(IntPtr obj, IntPtr proxy0) {
-			return _nativeAddSingleResult[obj].NeedsCollisionUnmanaged(proxy0);
+		internal static bool NeedsCollisionUnmanaged_Static(ulong obj, IntPtr proxy0) {
+			return IntRef.GetValue<RayResultCallback>(obj).NeedsCollisionUnmanaged(proxy0);
 		}
 
 		public abstract float AddSingleResult(ref LocalRayResult rayResult, bool normalInWorldSpace);

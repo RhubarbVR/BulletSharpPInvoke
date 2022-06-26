@@ -37,14 +37,15 @@ void btSoftBody_AJoint_IControlWrapper::setWrapperData(void* data)
 }
 
 
-btSoftBody_ImplicitFnWrapper::btSoftBody_ImplicitFnWrapper(p_btSoftBody_ImplicitFn_Eval EvalCallback)
+btSoftBody_ImplicitFnWrapper::btSoftBody_ImplicitFnWrapper(p_btSoftBody_ImplicitFn_Eval EvalCallback, uint64_t target)
 {
 	_EvalCallback = EvalCallback;
+	_target = target;
 }
 
 btScalar btSoftBody_ImplicitFnWrapper::Eval(const btVector3& x)
 {
-	return _EvalCallback(&x);
+	return _EvalCallback(_target,&x);
 }
 
 
@@ -1062,9 +1063,9 @@ void btSoftBody_Feature_setMaterial(btSoftBody_Feature* obj, btSoftBody_Material
 }
 
 
-btSoftBody_ImplicitFnWrapper* btSoftBody_ImplicitFnWrapper_new(p_btSoftBody_ImplicitFn_Eval EvalCallback)
+btSoftBody_ImplicitFnWrapper* btSoftBody_ImplicitFnWrapper_new(p_btSoftBody_ImplicitFn_Eval EvalCallback, uint64_t target)
 {
-	return new btSoftBody_ImplicitFnWrapper(EvalCallback);
+	return new btSoftBody_ImplicitFnWrapper(EvalCallback,target);
 }
 
 
