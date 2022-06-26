@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 	btDynamicsWorld_addRigidBody(world,body);
 	btDynamicsWorld_removeRigidBody(world,body);
 
-	btCollisionWorld_ConvexResultCallbackWrapper* convexCallback = btCollisionWorld_ConvexResultCallbackWrapper_new(addSingleResult, needsCollision);
+	btCollisionWorld_ConvexResultCallbackWrapper* convexCallback = btCollisionWorld_ConvexResultCallbackWrapper_new(addSingleResult, needsCollision,0);
 	bool hit = btCollisionWorld_ConvexResultCallback_hasHit(convexCallback);
 	if (hit)
 	{
