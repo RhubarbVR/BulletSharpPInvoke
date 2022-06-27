@@ -22,12 +22,14 @@ namespace BulletSharp
 		private delegate bool ContactDestroyedUnmanagedDelegate(IntPtr userPersistantData);
 		[UnmanagedFunctionPointer(BulletSharp.Native.CONV), SuppressUnmanagedCodeSecurity]
 		private delegate bool ContactProcessedUnmanagedDelegate(IntPtr cp, IntPtr body0, IntPtr body1);
+		[AOT.MonoPInvokeCallback(typeof(ContactDestroyedUnmanagedDelegate))]
 
 		private static bool ContactDestroyedUnmanaged(IntPtr userPersistentData)
 		{
 			_contactDestroyed.Invoke(GCHandle.FromIntPtr(userPersistentData).Target);
 			return false;
 		}
+		[AOT.MonoPInvokeCallback(typeof(ContactProcessedUnmanagedDelegate))]
 
 		private static bool ContactProcessedUnmanaged(IntPtr cp, IntPtr body0, IntPtr body1)
 		{
