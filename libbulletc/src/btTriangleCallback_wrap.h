@@ -7,8 +7,6 @@
 #define btTriangleCallbackWrapper void
 #else
 
-typedef unsigned long long rhu_uint64_t;
-
 typedef void (*p_btInternalTriangleIndexCallback_internalProcessTriangleIndex)(rhu_uint64_t target, btVector3* triangle,
 	int partId, int triangleIndex);
 

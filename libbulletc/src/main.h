@@ -26,6 +26,8 @@
 #endif
 #endif
 
+#define rhu_uint64_t unsigned long long
+
 #define ALIGNED_NEW_FORCE(targetClass) new (btAlignedAlloc(sizeof(targetClass), 16)) targetClass
 #define ALIGNED_FREE_FORCE(target) btAlignedFree(target)
 

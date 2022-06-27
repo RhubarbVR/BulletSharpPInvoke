@@ -256,7 +256,7 @@ extern "C" {
 	EXPORT btSoftBody_Material* btSoftBody_Feature_getMaterial(btSoftBody_Feature* obj);
 	EXPORT void btSoftBody_Feature_setMaterial(btSoftBody_Feature* obj, btSoftBody_Material* value);
 
-	EXPORT btSoftBody_ImplicitFnWrapper* btSoftBody_ImplicitFnWrapper_new(p_btSoftBody_ImplicitFn_Eval EvalCallback, uint64_t target);
+	EXPORT btSoftBody_ImplicitFnWrapper* btSoftBody_ImplicitFnWrapper_new(p_btSoftBody_ImplicitFn_Eval EvalCallback, rhu_uint64_t target);
 
 	EXPORT btScalar btSoftBody_ImplicitFn_Eval(btSoftBody_ImplicitFn* obj, const btVector3* x);
 	EXPORT void btSoftBody_ImplicitFn_delete(btSoftBody_ImplicitFn* obj);

@@ -11,7 +11,6 @@
 #define btCollisionWorld_ConvexResultCallbackWrapper void
 #define btCollisionWorld_RayResultCallbackWrapper void
 #else
-typedef unsigned long long rhu_uint64_t;
 
 typedef btScalar (*p_btCollisionWorld_ContactResultCallback_addSingleResult)(rhu_uint64_t target, btManifoldPoint& cp,
 	const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
