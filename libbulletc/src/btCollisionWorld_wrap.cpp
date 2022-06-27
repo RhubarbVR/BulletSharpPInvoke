@@ -10,7 +10,7 @@
 
 btCollisionWorld_ContactResultCallbackWrapper::btCollisionWorld_ContactResultCallbackWrapper(
 	p_btCollisionWorld_ContactResultCallback_addSingleResult addSingleResultCallback,
-	p_btCollisionWorld_ContactResultCallback_needsCollision needsCollisionCallback, uint64_t target)
+	p_btCollisionWorld_ContactResultCallback_needsCollision needsCollisionCallback, rhu_uint64_t target)
 {
 	_addSingleResultCallback = addSingleResultCallback;
 	_needsCollisionCallback = needsCollisionCallback;
@@ -38,7 +38,7 @@ bool btCollisionWorld_ContactResultCallbackWrapper::baseNeedsCollision(btBroadph
 
 btCollisionWorld_ConvexResultCallbackWrapper::btCollisionWorld_ConvexResultCallbackWrapper(
 	p_btCollisionWorld_ConvexResultCallback_addSingleResult addSingleResultCallback,
-	p_btCollisionWorld_ConvexResultCallback_needsCollision needsCollisionCallback, uint64_t target)
+	p_btCollisionWorld_ConvexResultCallback_needsCollision needsCollisionCallback, rhu_uint64_t target)
 {
 	_addSingleResultCallback = addSingleResultCallback;
 	_needsCollisionCallback = needsCollisionCallback;
@@ -63,7 +63,7 @@ bool btCollisionWorld_ConvexResultCallbackWrapper::baseNeedsCollision(btBroadpha
 
 
 btCollisionWorld_RayResultCallbackWrapper::btCollisionWorld_RayResultCallbackWrapper(
-	p_btCollisionWorld_RayResultCallback_addSingleResult addSingleResultCallback, p_btCollisionWorld_RayResultCallback_needsCollision needsCollisionCallback,uint64_t target)
+	p_btCollisionWorld_RayResultCallback_addSingleResult addSingleResultCallback, p_btCollisionWorld_RayResultCallback_needsCollision needsCollisionCallback, rhu_uint64_t target)
 {
 	_addSingleResultCallback = addSingleResultCallback;
 	_needsCollisionCallback = needsCollisionCallback;
@@ -275,7 +275,7 @@ void btCollisionWorld_ClosestRayResultCallback_setRayToWorld(btCollisionWorld_Cl
 
 btCollisionWorld_ContactResultCallbackWrapper* btCollisionWorld_ContactResultCallbackWrapper_new(
 	p_btCollisionWorld_ContactResultCallback_addSingleResult addSingleResultCallback,
-	p_btCollisionWorld_ContactResultCallback_needsCollision needsCollisionCallback, uint64_t target)
+	p_btCollisionWorld_ContactResultCallback_needsCollision needsCollisionCallback, rhu_uint64_t target)
 {
 	return new btCollisionWorld_ContactResultCallbackWrapper(addSingleResultCallback,
 		needsCollisionCallback,target);
@@ -342,7 +342,7 @@ void btCollisionWorld_ContactResultCallback_delete(btCollisionWorld_ContactResul
 
 btCollisionWorld_ConvexResultCallbackWrapper* btCollisionWorld_ConvexResultCallbackWrapper_new(
 	p_btCollisionWorld_ConvexResultCallback_addSingleResult addSingleResultCallback,
-	p_btCollisionWorld_ConvexResultCallback_needsCollision needsCollisionCallback, uint64_t target)
+	p_btCollisionWorld_ConvexResultCallback_needsCollision needsCollisionCallback, rhu_uint64_t target)
 {
 	return ALIGNED_NEW(btCollisionWorld_ConvexResultCallbackWrapper) (addSingleResultCallback,
 		needsCollisionCallback,target);
@@ -580,7 +580,7 @@ void btCollisionWorld_LocalShapeInfo_delete(btCollisionWorld_LocalShapeInfo* obj
 
 
 btCollisionWorld_RayResultCallbackWrapper* btCollisionWorld_RayResultCallbackWrapper_new(
-	p_btCollisionWorld_RayResultCallback_addSingleResult addSingleResultCallback, p_btCollisionWorld_RayResultCallback_needsCollision needsCollisionCallback,uint64_t target)
+	p_btCollisionWorld_RayResultCallback_addSingleResult addSingleResultCallback, p_btCollisionWorld_RayResultCallback_needsCollision needsCollisionCallback, rhu_uint64_t target)
 {
 	return ALIGNED_NEW(btCollisionWorld_RayResultCallbackWrapper) (addSingleResultCallback,
 		needsCollisionCallback, target);
