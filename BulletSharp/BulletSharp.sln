@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{7B150825
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletSharpTests", "..\BulletSharpTests\BulletSharpTests.csproj", "{2A3B3DD0-956E-4034-8E92-94AE0F1CBAB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{F67952FF-7997-49C8-BCE9-334F0D771FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F67952FF-7997-49C8-BCE9-334F0D771FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F67952FF-7997-49C8-BCE9-334F0D771FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A3B3DD0-956E-4034-8E92-94AE0F1CBAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A3B3DD0-956E-4034-8E92-94AE0F1CBAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A3B3DD0-956E-4034-8E92-94AE0F1CBAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A3B3DD0-956E-4034-8E92-94AE0F1CBAB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

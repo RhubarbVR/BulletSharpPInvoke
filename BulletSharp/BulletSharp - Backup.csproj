@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1;net6;net5;</TargetFrameworks>
+	  <Version>1.2.3.0</Version>
+	  <LangVersion>latest</LangVersion>
+    <Authors>Andres Traks, Faolan</Authors>
+    <Company />
+    <PackageLicenseUrl>https://github.com/AndresTraks/BulletSharpPInvoke/blob/master/BulletSharp/license.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/RhubarbVR/BulletSharpPInvoke</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://raw.githubusercontent.com/AndresTraks/BulletSharp/gh-pages/images/bullet_logo_64x64.png</PackageIconUrl>
+    <Description>.NET wrapper for the Bullet physics engine 
+Forked from https://github.com/AndresTraks/BulletSharpPInvoke </Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PackageIcon>RhubarbVR2_1149.png</PackageIcon>
+    <PackageId>Rhu$(AssemblyName)</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="demos\**" />
+    <Compile Remove="runtimes\**" />
+    <Compile Remove="test\**" />
+    <EmbeddedResource Remove="demos\**" />
+    <EmbeddedResource Remove="runtimes\**" />
+    <EmbeddedResource Remove="test\**" />
+    <None Remove="demos\**" />
+    <None Remove="runtimes\**" />
+    <None Remove="test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="RhubarbVR2_1149.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="RhubarbVR2_1149.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+  </ItemGroup>
+
+	
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
