@@ -8,11 +8,12 @@ namespace BulletSharp
 	internal static class IntRef
 	{
 		public static ulong LoadValueIn<T>(T tvalue) {
-			return (ulong)Marshal.GetIUnknownForObject(tvalue);
+			return (ulong)GCHandle.ToIntPtr(GCHandle.Alloc(tvalue,GCHandleType.Weak));
 		}
 
 		public static T GetValue<T>(ulong value) {
-			return (T)Marshal.GetObjectForIUnknown(new IntPtr((long)value));
+			var hanndle = GCHandle.FromIntPtr(new IntPtr((long)value));
+			return hanndle.Target is null ? throw new Exception("Data was garbage collected") : (T)hanndle.Target;
 		}
 	}
 }
